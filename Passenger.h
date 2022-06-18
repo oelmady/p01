@@ -1,5 +1,7 @@
 /*
- *
+ The Passenger class creates instances of passengers with an id, a starting station, and a destination. Passengers are initialized with all three parameters, or otherwise no valid values. 
+
+Author: Omar Elmady 
  */
 
 
@@ -7,29 +9,34 @@
 #define __PASSENGER_H__
 
 #include <iostream>
+#include <string>
+using namespace std;
 
 struct Passenger
 {
 
-        int id, from, to;
-        
-        Passenger()
-        {
-                id   = -1;
-                from = -1;
-                to   = -1;
-        }
+	int id, from, to;
+	
+	Passenger()
+	{
+		id   = -1;
+		from = -1;
+		to   = -1;
+	}
 
-        Passenger(int newId, int arrivalStation, int departureStation)
-        {
-                id   = newId;
-                from = arrivalStation;
-                to   = departureStation;
-        }
+	Passenger(int newId, int arrivalStation, int departureStation)
+	{
+		id   = newId;
+		from = arrivalStation;
+		to   = departureStation;
+	}
 
-        // TODO: implement the print function in Passenger.cpp
-        void print(std::ostream &output);
-
+	// TODO: implement the print function in Passenger.cpp
+	void print(std::ostream &output)
+	{
+		string p = "[" + to_string(id) + " ," + to_string(from) + "->" + to_string(to) + "]";
+		cout << p;
+	}
 };
 
 #endif
