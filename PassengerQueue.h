@@ -16,31 +16,32 @@ class PassengerQueue
 {
 public:
     Passenger front() { return queue.front(); }
-    void dequeue() 
-    { 
+    void dequeue()
+    {
         if (!queue.empty()) 
-        { 
+        {
             queue.pop_front(); 
         }
     }
     void enqueue(const Passenger &p) 
-    { 
-        queue.push_back(p); 
+    {
+        queue.push_back(p);
     }
     int size() 
-    { 
+    {
         return queue.size(); 
     }
-    void print(std::ostream &os) 
+    void print(std::ostream &os)
     {
         for (const Passenger &current : queue)
         {
             string out = "[" + to_string(current.id) + ", " + to_string(current.from) + "->" + to_string(current.to) + "]";
-            os << out << std::end;
-        } // strange bug: expected ; ??
+            os << out;
+        }
     }
 private:
     std::list<Passenger> queue;
+    // int q_id;
 };
 
 #endif;
