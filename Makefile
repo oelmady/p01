@@ -15,8 +15,8 @@ LDFLAGS  = -g3
 # If you add other classes, you'll have to add their .o files as dependencies here.
 # Don't forget:  the clang++ command must be indented with a TAB character
 # and be all on one line.
-MetroSim: main.o MetroSim.o PassengerQueue.o Passenger.o
-	
+MetroSim: main.o MetroSim.o Metro.o PassengerQueue.o Passenger.o
+	$(CXX) $(CXXFLAGS) -o MetroSim
 
 # ***TODO***
 # Write rules for any other .o files.
@@ -27,6 +27,11 @@ MetroSim: main.o MetroSim.o PassengerQueue.o Passenger.o
 PassengerQueue.o: PassengerQueue.cpp PassengerQueue.h Passenger.h 
 	$(CXX) $(CXXFLAGS) -c PassengerQueue.cpp
 
+Passenger.o: Passenger.cpp Passenger.h 
+	$(CXX) $(CXXFLAGS) -c Passenger.cpp
+
+Metro.o: Metro.cpp Metro.h Passenger.h PassengerQueue.h 
+	$(CXX) $(CXXFLAGS) -c Metro.cpp
 
 # ***TODO***
 # The below rule will be used by unit_test.

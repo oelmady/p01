@@ -1,23 +1,14 @@
 /*
- *
- */
-
+Defines the metro sim driver, containing functions for interpreting user commands when using the program. 
+*/
 #ifndef _METROSIM_H_
 #define _METROSIM_H_
 
-#include "Passenger.h"
-
-// Put any other necessary includes here
-
-
-// Put any other structs you need here
-
 class MetroSim
 {
-public:
-
-private:
-
+    void stop();
+    void move();
+    void addPassenger(int from, int to);
 };
 
 #endif
