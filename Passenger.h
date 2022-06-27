@@ -31,11 +31,7 @@ struct Passenger
 		to   = departureStation;
 	}
 
-	void print(std::ostream &out)
-	{
-		string p = "[" + to_string(id) + " ," + to_string(from) + "->" + to_string(to) + "]";
-		out << p;
-	}
+	void print(std::ostream &out);
 };
 
 #endif

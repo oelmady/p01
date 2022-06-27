@@ -3,7 +3,7 @@
 #########################################################
 
 CXX      = clang++
-CXXFLAGS = -g3 -Wall -Wextra -Wpedantic -Wshadow
+CXXFLAGS = -std=c++11 -g3 -Wall -Wextra -Wpedantic -Wshadow
 LDFLAGS  = -g3 
 
 # ***TODO***
@@ -27,17 +27,27 @@ MetroSim: main.o MetroSim.o Metro.o PassengerQueue.o Passenger.o
 PassengerQueue.o: PassengerQueue.cpp PassengerQueue.h Passenger.h 
 	$(CXX) $(CXXFLAGS) -c PassengerQueue.cpp
 
+# this rule builds Passenger.o
 Passenger.o: Passenger.cpp Passenger.h 
 	$(CXX) $(CXXFLAGS) -c Passenger.cpp
 
+#this rule builds Metro.o
 Metro.o: Metro.cpp Metro.h Passenger.h PassengerQueue.h 
 	$(CXX) $(CXXFLAGS) -c Metro.cpp
 
+#this rule builds MetroSim.o
+MetroSim.o: MetroSim.cpp MetroSim.h Passenger.h PassengerQueue.h Metro.h
+	$(CXX) $(CXXFLAGS) -c MetroSim.cpp
+
+#this rule builds unit_test.o
+unit_test.o: unit_test.cpp Metro.h PassengerQueue.h Passenger.h 
+	$(CXX) $(CXXFLAGS) -c unit_test.cpp
+	
 # ***TODO***
 # The below rule will be used by unit_test.
 # Please add any other .o files that are needed by PassengerQueue,
 # and any other .o files you wish to test. 
-unit_test: unit_test_driver.o PassengerQueue.o Passenger.o
+unit_test: unit_test.o Metro.o PassengerQueue.o Passenger.o
 	$(CXX) $(CXXFLAGS) $^
 
 

@@ -6,9 +6,14 @@ Defines the metro sim driver, containing functions for interpreting user command
 
 class MetroSim
 {
+public:
     void stop();
     void move();
-    void addPassenger(int from, int to);
+    void addPassenger(int id, int from, int to);
+    void print();
+private:
+    int num_passengers = 0;
+    Metro train;
 };
 
 #endif

@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Thu Jun 23 19:28:31 2022
+# Make data base, printed on Sat Jun 25 21:39:34 2022
 
 # Variables
 
@@ -34,13 +34,13 @@ _ = /usr/bin/make
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 6)
-CXXFLAGS = -g3 -Wall -Wextra -Wpedantic -Wshadow
+CXXFLAGS = -std=c++11 -g3 -Wall -Wextra -Wpedantic -Wshadow
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/z7/m_vr990538q2p0kk1n87k1ph0000gn/T/vscode-ipc-752962ce-4ae8-4170-b782-35d38a7c5b39.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/z7/m_vr990538q2p0kk1n87k1ph0000gn/T/vscode-ipc-c8b97522-30de-4901-8313-4e38c23e7b38.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -185,6 +185,12 @@ LANG = C
 # Files
 
 # Not a target:
+unit_test.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 Metro.h:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -222,11 +228,17 @@ Metro.cpp:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-23 19:28:30
+#  Last modified 2022-06-24 23:02:23
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+Passenger.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 PassengerQueue.h:
@@ -241,24 +253,38 @@ Passenger.h:
 #  File has not been updated.
 
 # Not a target:
-Passenger.cpp:
+MetroSim.h:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-unit_test: unit_test_driver.o PassengerQueue.o Passenger.o
+unit_test.o: unit_test.cpp Metro.h PassengerQueue.h Passenger.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 41):
+#  commands to execute (from `Makefile', line 44):
+	$(CXX) $(CXXFLAGS) -c unit_test.cpp
+	
+
+unit_test: unit_test.o Metro.o PassengerQueue.o Passenger.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 51):
 	$(CXX) $(CXXFLAGS) $^
 	
+
+# Not a target:
+MetroSim.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 Metro.o: Metro.cpp Metro.h Passenger.h PassengerQueue.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 34):
+#  commands to execute (from `Makefile', line 36):
 	$(CXX) $(CXXFLAGS) -c Metro.cpp
 	
 
@@ -278,7 +304,7 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 47):
+#  commands to execute (from `Makefile', line 57):
 	rm *.o *~ a.out
 	
 
@@ -291,8 +317,11 @@ main.o:
 Passenger.o: Passenger.cpp Passenger.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
+make: *** No rule to make target `all'.  Stop.
+
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 31):
+#  commands to execute (from `Makefile', line 32):
 	$(CXX) $(CXXFLAGS) -c Passenger.cpp
 	
 
@@ -304,23 +333,16 @@ MetroSim: main.o MetroSim.o Metro.o PassengerQueue.o Passenger.o
 	$(CXX) $(CXXFLAGS) -o MetroSim
 	
 
-# Not a target:
-MetroSim.o:
+MetroSim.o: MetroSim.cpp MetroSim.h Passenger.h PassengerQueue.h Metro.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-
-# Not a target:
-unit_test_driver.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  commands to execute (from `Makefile', line 40):
+	$(CXX) $(CXXFLAGS) -c MetroSim.cpp
+	
 
 # files hash-table stats:
- 
-make: *** No rule to make target `all'.  Stop.
-
-# Load=19/1024=2%, Rehash=0, Collisions=3/48=6%
+# Load=22/1024=2%, Rehash=0, Collisions=7/61=11%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -332,6 +354,6 @@ make: *** No rule to make target `all'.  Stop.
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Jun 23 19:28:31 2022
+# Finished Make data base on Sat Jun 25 21:39:34 2022
 
  

@@ -1,5 +1,5 @@
 /*
- *
+ * this file implements the print function for the passenger class
  */
 
 #include <iostream>
@@ -7,10 +7,12 @@
 #include "Passenger.h"
 
 /*
- * Remember to write a complete function contract here!
+Prints to output stream the following 
+[ID, TO->FROM]
+
  */
-void Passenger::print(std::ostream &output)
+void Passenger::print(std::ostream &out)
 {
-        // TODO: print passenger information to the output stream
-        //       as described in the assignment specification
+	string p = "[" + to_string(id) + ", " + to_string(from) + "->" + to_string(to) + "]";
+	out << p;
 }
