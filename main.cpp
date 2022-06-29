@@ -9,8 +9,11 @@
 #include <fstream>
 #include <string>
 
-#include "MetroSim.h"
+#include "Passenger.h"
+#include "PassengerQueue.h"
 #include "Metro.h"
+#include "MetroSim.h"
+
 
 using namespace std;
 

@@ -19,7 +19,7 @@ moves the train forward one stop. the print function will indicate the train is 
 */
 void MetroSim::move()
 {
-    train.moveTrain();
+    metro.moveTrain();
 }
 
 /*
@@ -29,7 +29,7 @@ returns nothing
 void MetroSim::addPassenger(int id, int from, int to)
 {
     Passenger * p = new Passenger(id, from, to);
-    train.addToStation(*p, from);
+    metro.addToStation(*p, from);
 }
 
 void MetroSim::print()

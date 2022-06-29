@@ -6,7 +6,21 @@ This file implements the functions of the Metro class, which is responsible for 
 #include "PassengerQueue.h"
 #include "Metro.h"
 
-/* adds a reference to a passenger to the end of the PQ of the stations <vector> with index[p.from]
+// default constructor initializes a metro
+// with 2 stations, compartments
+Metro::Metro()
+{
+    std::vector<PassengerQueue> compartments[numStations];
+    std::vector<PassengerQueue> stations[numStations]; 
+}
+// constructs a metro with ns stations, compartments
+Metro::Metro(int ns)
+{
+    std::vector<PassengerQueue> compartments[ns]; 
+    std::vector<PassengerQueue> stations[ns]; 
+}
+
+/* points a passenger to the back of the queue of the station with index[p.from]
 */
 void Metro::addToStation(const Passenger &p)
 {
@@ -14,7 +28,8 @@ void Metro::addToStation(const Passenger &p)
 }
 
 /*
-removes a Passenger p from the station and adds them to the compartment [p.to] of the train;
+private function 
+points a Passenger p to the back of the queue of their destination compartment [p.to] of the train;
 NOTE: must only be called by moveTrain(), which calls boardTrain(p) for all p's at [currentStation];
 */
 void Metro::boardTrain(const Passenger &p)
@@ -23,10 +38,11 @@ void Metro::boardTrain(const Passenger &p)
 }
 
 /*
-removes a Passenger from the train when it arrives at its destination
+removes a Passenger from the train when it arrives at its destination (NOTE: function is called BEFORE printing the metro state.)
 returns a message to -the output file- (not std::cout), followed by a single newline:
          Passenger ID left train at station STATION_NAME
 NOTE: is designed to work in conjunction with the destructive PassengerQueue command dequeue(), which returns the Passenger removed from the PQ
+
 */
 string Metro::disembarkAtStation(Passenger &p, int destination)
 {
@@ -34,29 +50,57 @@ string Metro::disembarkAtStation(Passenger &p, int destination)
     return write;
 }
 
-/* calls boardTrain on all passengers if any at currentStation before incrementing the currentStation by 1
-returns nothing
+/* calls boardTrain on all passengers, if any, at currentStation before incrementing the currentStation
 */
 void Metro::moveTrain()
 {
-    PassengerQueue station = stations[currentStation];
-    for (const Passenger &p : station) {
-        int toComp = p.to;
-        compartments[toComp].enqueue(p);
+    // departing passengers disembark at currentStation
+    PassengerQueue arrival = compartments[currentStation];
+    while(arrival.size() > 0)
+    {
+        Passenger p = arrival.front();
+        disembarkAtStation(p, currentStation);
+        arrival.dequeue();
     }
-    currentStation++;
-
+    // arriving passengers board as the train is leaving the station...
+    PassengerQueue station = stations[currentStation];
+    while (station.size() > 0){
+        boardTrain(station.front());
+        station.dequeue();
+    }
+    currentStation = (currentStation + 1) & numStations;
 }
 /*
-prints the entire train, including 
-all passengers on the train
-all 0-indexed stations with station names 
-and all passengers if any at each station
-the location of the train
+prints the entire train, including:
+all passengers on the train;
+all 0-indexed stations with station names;
+and all passengers if any at each station;
+and the location of the train;
 */
 void Metro::printTrain()
 {
+    string spaces = "       "; // 7 char
+    string train = "TRAIN: "; // 7 char
 
+    cout << "Passengers on the train: {";
+    for (int i = 0; i < numStations; i++) 
+    {
+        compartments[i].print(std::cout);
+    }
+    cout << "}\n";
+    for (int i = 0; i < numStations; i++) 
+    {
+        if (i == currentStation){
+            cout << train;
+        }
+        else { 
+            cout << spaces; 
+        }
+        cout << "[" << i << "] ";
+        cout << stations[i].name << " {";
+        stations[i].print(std::cout);
+        cout << "}\n";
+    }
 }
 
 

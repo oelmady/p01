@@ -1,5 +1,5 @@
 /*
-this file implements the functionality of the Passenger queue class, which is a queue of passengers using the <list> data structure.
+this file implements the functionality of the Passenger queue class, which is a queue of passengers using the doubly linked list data structure std::list.
 */
 
 #include "Passenger.h"
@@ -9,31 +9,31 @@ Passenger PassengerQueue::front() const
 { 
     return queue.front(); 
 }
+
 /*
-returns the first passegner in the queue, removing them from the queue and decreasing size of the queue by 1.
+removes the passenger at the front of the list
+returns nothing
 */
-Passenger PassengerQueue::dequeue()
+void PassengerQueue::dequeue()
 {
-    if (!queue.empty()) 
-    {
-        Passenger &result = queue.front();
-        queue.pop_front(); 
-        return result;
-    }
-    return;
+    queue.pop_front();
+    length--;
 }
 
-// adds a pointer to the passenger
+// points the passenger to the back of the queue
 void PassengerQueue::enqueue(const Passenger &p) 
 {
     queue.push_back(p);
+    length++;
 }
 
+// returns number of passengers in the queue
 int PassengerQueue::size() 
 {
-    return queue.size(); 
+    return length; 
 }
 
+// prints formatted content of the passengers in the queue, without spaces between them
 void PassengerQueue::print(std::ostream &os)
 {
     for (const Passenger &current : queue)

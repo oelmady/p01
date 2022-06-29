@@ -1,5 +1,6 @@
 /*
-The PassengerQueue class defines the functionality for the metro simulator, adding and removing passengers on the metro simulator as the train moves from one station to another.
+The PassengerQueue class defines the functionality for the metro simulator, adding and removing passengers from queues in the metro simulator.
+*this class manages the placement of passengers in memory, and can delete or move data of class Passenger.
 */
 
 #ifndef __PASSENGERQUEUE_H__
@@ -15,14 +16,14 @@ class PassengerQueue
 {
 public:
     Passenger front() const;
-    Passenger dequeue();
+    void dequeue();
     void enqueue(const Passenger &p);
     int size();
     void print(std::ostream &os);
     string name;
 private:
     std::list<Passenger> queue;
-    
+    int length = 0;
 };
 
 #endif

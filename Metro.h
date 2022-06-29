@@ -1,6 +1,6 @@
 /*
- * This file contains the header functions for the Metro class, which interacts directly with the driver MetroSim class for the metro simulation program.
- * The Metro class can be used to enqueue, dequeue and print passengers and stations on the Metro route of the metro sim
+ * This file contains the header functions for the Metro class, which can enqueue, dequeue, and print passengers and stations on the Metro route of the metro sim
+ * this class organizes the passengers among passengerqueues with 0-index order.
  */
 
 #ifndef _Metro_H_
@@ -15,14 +15,16 @@
 class Metro
 {
 public:
+    Metro();
+    Metro(int stations);
     void addToStation(const Passenger &p);
-    void boardTrain(const Passenger &p);
-    string disembarkAtStation(Passenger &p, int destination);
     void moveTrain();
     void printTrain();
     int currentStation = 0;
 private:
-    int num_stations;
+    void boardTrain(const Passenger &p);
+    string disembarkAtStation(Passenger &p, int destination);
+    int numStations = 2;
     std::vector<PassengerQueue> compartments; 
     std::vector<PassengerQueue> stations; 
 };
