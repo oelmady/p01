@@ -10,23 +10,25 @@
 #include "PassengerQueue.h"
 #include <vector>
 #include <string>
-
+#include <iostream>
+#include <ofstream>
 
 class Metro
 {
 public:
-    Metro();
-    Metro(int stations);
     void addToStation(const Passenger &p);
     void moveTrain();
+    void disembarkAtStation(std::ofstream &file);
     void printTrain();
+    void newStation(string name);
     int currentStation = 0;
 private:
     void boardTrain(const Passenger &p);
-    string disembarkAtStation(Passenger &p, int destination);
-    int numStations = 2;
-    std::vector<PassengerQueue> compartments; 
-    std::vector<PassengerQueue> stations; 
+    string disembark();
+    string farewell(Passenger &p) const;
+    int numStations = 0;
+    std::vector<PassengerQueue*> compartments; 
+    std::vector<PassengerQueue*> stations; 
 };
 
 #endif

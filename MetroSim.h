@@ -10,14 +10,14 @@ class MetroSim
 public:
     void stop();
     void move();
-    void addPassenger(int id, int from, int to);
+    void addPassenger(int from, int to);
     void printMap();
 private:
     void readStations();
     // void readCommandsFile();
     void readCommands();
     void outputToFile();
-    int num_passengers = 0;
+    int numPassengers = 0;
     Metro metro;
 };
 

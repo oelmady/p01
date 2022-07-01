@@ -16,7 +16,7 @@ LDFLAGS  = -g3
 # Don't forget:  the clang++ command must be indented with a TAB character
 # and be all on one line.
 MetroSim: main.o MetroSim.o Metro.o PassengerQueue.o Passenger.o
-	$(CXX) $(CXXFLAGS) -o MetroSim
+	$(CXX) $(CXXFLAGS) -o MetroSim $^
 
 # ***TODO***
 # Write rules for any other .o files.
@@ -43,6 +43,8 @@ MetroSim.o: MetroSim.cpp MetroSim.h Passenger.h PassengerQueue.h Metro.h
 unit_test.o: unit_test.cpp Metro.h PassengerQueue.h Passenger.h 
 	$(CXX) $(CXXFLAGS) -c unit_test.cpp
 	
+main.o: main.cpp MetroSim.h Passenger.h PassengerQueue.h Metro.h 
+	$(CXX) $(CXXFLAGS) -c main.cpp
 # ***TODO***
 # The below rule will be used by unit_test.
 # Please add any other .o files that are needed by PassengerQueue,

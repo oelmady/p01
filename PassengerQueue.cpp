@@ -4,6 +4,12 @@ this file implements the functionality of the Passenger queue class, which is a 
 
 #include "Passenger.h"
 #include "PassengerQueue.h"
+
+// constructor for stations only, assigns station a name
+PassengerQueue::PassengerQueue(string str)
+{
+    name = str;
+}
 // returns the front of the queue, if any
 Passenger PassengerQueue::front() const
 { 
@@ -11,7 +17,7 @@ Passenger PassengerQueue::front() const
 }
 
 /*
-removes the passenger at the front of the list
+destroys the passenger at the front of the list, reformatting the list and reducing its size by 1
 returns nothing
 */
 void PassengerQueue::dequeue()

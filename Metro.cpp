@@ -5,20 +5,8 @@ This file implements the functions of the Metro class, which is responsible for 
 #include "Passenger.h"
 #include "PassengerQueue.h"
 #include "Metro.h"
-
-// default constructor initializes a metro
-// with 2 stations, compartments
-Metro::Metro()
-{
-    std::vector<PassengerQueue> compartments[numStations];
-    std::vector<PassengerQueue> stations[numStations]; 
-}
-// constructs a metro with ns stations, compartments
-Metro::Metro(int ns)
-{
-    std::vector<PassengerQueue> compartments[ns]; 
-    std::vector<PassengerQueue> stations[ns]; 
-}
+#include <iostream>
+#include <ofstream>
 
 /* points a passenger to the back of the queue of the station with index[p.from]
 */
@@ -38,38 +26,66 @@ void Metro::boardTrain(const Passenger &p)
 }
 
 /*
-removes a Passenger from the train when it arrives at its destination (NOTE: function is called BEFORE printing the metro state.)
+removes a Passenger from the train when it arrives at its destination 
 returns a message to -the output file- (not std::cout), followed by a single newline:
          Passenger ID left train at station STATION_NAME
-NOTE: is designed to work in conjunction with the destructive PassengerQueue command dequeue(), which returns the Passenger removed from the PQ
 
+desired result: every disembarking passenger is coupled to a string written to a file given to the calling function in main() on MetroSim. 
+this function is called by the MetroSim class to write the passenger information to a file given by main()
+so the disembark function will not have that file 
+but it needs to return the string of information to metrosim for every disembarking passenger 
 */
-string Metro::disembarkAtStation(Passenger &p, int destination)
+// private helper function returns the information of the departing passenger
+string Metro::farewell(Passenger &p) const
 {
-    string write = "Passenger " + to_string(p.id) + " left train at station " + stations[destination].name + "\n";
+    string write = "Passenger " + to_string(p.id) + " left train at station " + stations[p.to].name;
     return write;
 }
 
-/* calls boardTrain on all passengers, if any, at currentStation before incrementing the currentStation
+// private helper function removes ALL passengers in the compartment from the simulation and retrieves their information for output
+// returns a string containing formatted passenger information for output to a file
+string Metro::disembark()
+{
+    string output;
+    PassengerQueue dest = compartments[currentStation];
+    while (dest.size() > 0)
+    {
+        Passenger p = dest.front();
+        output += farewell(p) + "\n";
+        dest.dequeue();
+    }
+    return output;
+}
+// public function removes all passengers at the station if any, and writes their information to a provided file
+void Metro::disembarkAtStation(std::ofstream &file)
+{
+    PassengerQueue dest = stations[currentStation];
+    if (dest.size() > 0){
+        file << disembark();
+    }
+}
+
+/* calls boardTrain on all passengers if any, at the next station, so that there are no passengers waiting at the station with the train.
 */
 void Metro::moveTrain()
 {
-    // departing passengers disembark at currentStation
-    PassengerQueue arrival = compartments[currentStation];
-    while(arrival.size() > 0)
-    {
-        Passenger p = arrival.front();
-        disembarkAtStation(p, currentStation);
-        arrival.dequeue();
-    }
-    // arriving passengers board as the train is leaving the station...
+    currentStation = (currentStation + 1) & numStations;
+    
+    // moves passengers from the station to the train
     PassengerQueue station = stations[currentStation];
     while (station.size() > 0){
-        boardTrain(station.front());
-        station.dequeue();
+        boardTrain(std::move(station.front()));
     }
-    currentStation = (currentStation + 1) & numStations;
 }
+
+// adds a named station to the metro
+void Metro::newStation(string name)
+{
+   PassengerQueue station(name);
+   stations.push_back(station);
+   numStations++;
+}
+
 /*
 prints the entire train, including:
 all passengers on the train;
