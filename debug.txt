@@ -1,7 +1,7 @@
 compartments are vectors of pointers to passenger queues
 stations are vectors of pointers to passenger queues
 
-passenger queues are pointers to passengers
+passenger queues are queues of pointers to passengers
 
 passengers are instances of a class with some data 
 
