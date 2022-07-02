@@ -23,7 +23,7 @@ public:
     void print(std::ostream &os);
     string name;
 private:
-    std::list<Passenger> queue;
+    std::list<Passenger*> queue;
     int length = 0;
 };
 

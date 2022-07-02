@@ -13,7 +13,7 @@ PassengerQueue::PassengerQueue(string str)
 // returns the front of the queue, if any
 Passenger PassengerQueue::front() const
 { 
-    return queue.front(); 
+    return queue->front(); 
 }
 
 /*
@@ -22,14 +22,14 @@ returns nothing
 */
 void PassengerQueue::dequeue()
 {
-    queue.pop_front();
+    queue->pop_front();
     length--;
 }
 
 // points the passenger to the back of the queue
 void PassengerQueue::enqueue(const Passenger &p) 
 {
-    queue.push_back(p);
+    queue->push_back(p);
     length++;
 }
 
@@ -44,7 +44,7 @@ void PassengerQueue::print(std::ostream &os)
 {
     for (const Passenger &current : queue)
     {
-        string out = "[" + to_string(current.id) + ", " + to_string(current.from) + "->" + to_string(current.to) + "]";
+        string out = "[" + to_string(current->id) + ", " + to_string(current->from) + "->" + to_string(current->to) + "]";
         os << out;
     };
 }
