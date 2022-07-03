@@ -11,10 +11,9 @@ public:
     void stop();
     void move();
     void addPassenger(int from, int to);
-    void printMap();
 private:
-    void readStations();
-    // void readCommandsFile();
+    void readStations(ifstream& stationsFile);
+    void readCommandsFile();
     void readCommands();
     void outputToFile();
     int numPassengers = 0;

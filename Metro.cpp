@@ -9,3 +9,7 @@ This file implements the functions of the Metro class, which is responsible for 
 #include <fstream>
 using namespace std;
 
+void Metro::addToStation(const Passenger &p)
+{
+    
+}

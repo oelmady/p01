@@ -45,6 +45,7 @@ unit_test.o: unit_test.cpp Metro.h PassengerQueue.h Passenger.h
 	
 main.o: main.cpp MetroSim.h Passenger.h PassengerQueue.h Metro.h 
 	$(CXX) $(CXXFLAGS) -c main.cpp
+	
 # ***TODO***
 # The below rule will be used by unit_test.
 # Please add any other .o files that are needed by PassengerQueue,
