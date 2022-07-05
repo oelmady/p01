@@ -9,7 +9,7 @@
 #include <string>
 
 // Stop the simulation and exit the program, printing exit message
-// Delete all contents of the simulation: all the data of the train, passengerqueues, and passengers
+// when the simulation terminates, the default destructor of the MetroSim, Metro, PassengerQueue,and Passenger classes will garbage collect all data automatically.
 void MetroSim::stop()
 {
     on = false;

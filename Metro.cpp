@@ -11,11 +11,13 @@ This file implements the functions of the Metro class, which is responsible for 
 
 using namespace std;
 
+// adds a passenger to the station of the metro they are departing from
 void Metro::addToStation(const Passenger &p)
 {
     metro[p.from]->enqueue(p);
 }
 
+// a function that creates a new station with the name stationName and appends it to the metro, incrementing the number of stations by 1
 void Metro::newStation(string stationName)
 {
     shared_ptr<PassengerQueue> station(new PassengerQueue(stationName));
@@ -23,6 +25,7 @@ void Metro::newStation(string stationName)
     numStations++;
 }
 
+// a function that returns newline-separated data of each departing passenger 
 string Metro::disembarkAtStation()
 {
     string output;
@@ -37,12 +40,14 @@ string Metro::disembarkAtStation()
     return output;
 }
 
+// a private helper function that returns the data of the departing passenger 
 string Metro::farewell(const Passenger &p)
 {
     string message = "Passenger " + to_string(p.id) + " left the train at station " + metro[p.to]->name + "\n";
     return message;
 }
 
+// incrememnts the train's position and boards all passengers at the new station
 void Metro::moveTrain()
 {
     currentStation = (currentStation + 1) % numStations;
@@ -52,6 +57,10 @@ void Metro::moveTrain()
     }
 }
 
+// prints the contents of the metro 
+// on the first line prints all boarded passengers
+// on each subsequent line, prints the passengers waiting at that station 
+//also prints the location of the train
 void Metro::printTrain()
 {
     cout << "Passengers on the train: {";
