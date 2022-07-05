@@ -8,16 +8,17 @@ this class uniquely records the number of passengers in the simulation.
 class MetroSim
 {
 public:
+    MetroSim() { on = true; }
     void stop();
     void move();
     void addPassenger(int from, int to);
-private:
     void readStations(ifstream& stationsFile);
-    void readCommandsFile();
-    void readCommands();
-    void outputToFile();
+    void readCommand(string command);
+
     int numPassengers = 0;
     Metro metro;
+    bool on;
+    string output;
 };
 
 #endif

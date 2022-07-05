@@ -7,14 +7,10 @@ this file implements the functionality of the Passenger queue class, which is a 
 #include <iostream>
 #include <string>
 #include <list>
-// constructor for stations only, assigns station a name
-PassengerQueue::PassengerQueue(string str)
-{
-    name = str;
-}
+
 // returns the front of the queue, if any
 Passenger PassengerQueue::front() const
-{ 
+{
     return *queue.front(); 
 }
 
@@ -33,7 +29,7 @@ void PassengerQueue::dequeue()
 // points the passenger to the back of the queue
 void PassengerQueue::enqueue(const Passenger &p) 
 {
-    queue.push_back(&p);
+    queue.push_back(p);
     length++;
 }
 

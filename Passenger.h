@@ -17,6 +17,8 @@ struct Passenger
 
 	int id, from, to;
 	
+	bool boarded = false;
+
 	Passenger()
 	{
 		id   = -1;
@@ -32,6 +34,7 @@ struct Passenger
 	}
 
 	void print(std::ostream &out);
+
 };
 
 #endif

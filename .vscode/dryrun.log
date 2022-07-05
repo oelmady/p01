@@ -1,10 +1,10 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/omarelmady/Desktop/Studies/cs15/p01'
 clang++ -std=c++11 -g3 -Wall -Wextra -Wpedantic -Wshadow -c main.cpp
- 
 clang++ -std=c++11 -g3 -Wall -Wextra -Wpedantic -Wshadow -c MetroSim.cpp
+clang++ -std=c++11 -g3 -Wall -Wextra -Wpedantic -Wshadow -c Metro.cpp
 clang++ -std=c++11 -g3 -Wall -Wextra -Wpedantic -Wshadow -c PassengerQueue.cpp
+clang++ -std=c++11 -g3 -Wall -Wextra -Wpedantic -Wshadow -c Passenger.cpp
 clang++ -std=c++11 -g3 -Wall -Wextra -Wpedantic -Wshadow -o MetroSim main.o MetroSim.o Metro.o PassengerQueue.o Passenger.o
- 
 make: Leaving directory `/Users/omarelmady/Desktop/Studies/cs15/p01'
  

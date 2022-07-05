@@ -45,7 +45,7 @@ unit_test.o: unit_test.cpp Metro.h PassengerQueue.h Passenger.h
 	
 main.o: main.cpp MetroSim.h Passenger.h PassengerQueue.h Metro.h 
 	$(CXX) $(CXXFLAGS) -c main.cpp
-	
+
 # ***TODO***
 # The below rule will be used by unit_test.
 # Please add any other .o files that are needed by PassengerQueue,
@@ -57,4 +57,4 @@ unit_test: unit_test.o Metro.o PassengerQueue.o Passenger.o
 # remove executables, object code, and temporary files from the current folder 
 # -- the executable created by unit_test is called a.out
 clean: 
-	rm *.o *~ a.out
+	rm *.o a.out

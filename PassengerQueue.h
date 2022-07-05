@@ -15,15 +15,16 @@ The PassengerQueue class defines the functionality for the metro simulator, addi
 class PassengerQueue
 {
 public:
-    PassengerQueue(string str);
+    PassengerQueue() {};
+    PassengerQueue(string str) { name = str; };
     Passenger front() const;
     void dequeue();
     void enqueue(const Passenger &p);
     int size();
     void print(std::ostream &os);
     string name;
-private:
-    std::list<Passenger*> queue;
+// private:
+    std::list<Passenger *> queue;
     int length = 0;
 };
 

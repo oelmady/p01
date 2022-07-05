@@ -12,20 +12,21 @@
 #include <iostream>
 #include <fstream>
 
+using namespace std;
+
 class Metro
 {
 public:
     void addToStation(const Passenger &p);
     void moveTrain();
-    void disembarkAtStation(std::ofstream &file);
     void printTrain();
     void newStation(string name);
     int currentStation = 0;
+    string disembarkAtStation();
 private:
-    void boardTrain(const Passenger &p);
-    string disembark();
-    string farewell(Passenger &p) const;
+    string farewell(const Passenger &p);
     int numStations = 0;
+    std::vector<shared_ptr<PassengerQueue> > metro;
 };
 
 #endif
