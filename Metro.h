@@ -20,7 +20,7 @@ public:
     void addToStation(const Passenger &p);
     void moveTrain();
     void printTrain();
-    void newStation(string name);
+    void newStation(string stationName);
     int currentStation = 0;
     string disembarkAtStation();
 private:

@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-    PassengerQueue q("allah");
+    PassengerQueue q("dh");
     Passenger a(1,2,3);
     Passenger b(2,1,2);
     Passenger c(3,1,2);

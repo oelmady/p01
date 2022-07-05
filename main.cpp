@@ -18,7 +18,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 	string error;
-	if (argc < 2 || argc > 3) {
+	if (argc < 3 || argc > 4) {
 		error = "Usage: ./MetroSim stationsFile outputFile [commandsFile]";
 		cerr << error << endl;
 		return -1;
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 	ifstream commands;
-	if (argc == 3) {
+	if (argc == 4) {
 		commands.open(argv[3]);
 		if (!commands){
 			error = "Error: could not open file" + to_string(*argv[3]);
@@ -46,24 +46,32 @@ int main(int argc, char *argv[])
 			return -1;
 		}
 	}
-	MetroSim m;
-	m.readStations(stations);
 
-	while (m.on){
-		cout << "Command? ";
-		string input;
-		if (commands) {
-			getline(commands, input);
+	MetroSim m;
+
+	string stationName;
+    while ( getline(stations, stationName)){
+		m.readStations(stationName);
+	}
+	stations.close();
+
+	string command;
+	if (argc == 4){
+		while( getline(commands, command)) {
+			m.readCommand(command);
 		}
-		else {
-			getline(cin, input);
+		commands.close();
+	}
+	else {
+		while (m.on) {
+			cout << "Command? ";
+			getline(cin, command);
+			m.readCommand(command);
 		}
-		m.readCommand(input);
 	}
 
 	output << m.output << endl;
-
-	stations.close();
 	output.close();
-	if (commands) { commands.close(); }
+
+	return 0;
 }

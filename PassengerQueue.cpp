@@ -11,7 +11,7 @@ this file implements the functionality of the Passenger queue class, which is a 
 // returns the front of the queue, if any
 Passenger PassengerQueue::front() const
 {
-    return *queue.front(); 
+    return queue.front(); 
 }
 
 /*
@@ -44,8 +44,8 @@ void PassengerQueue::print(std::ostream &os)
 {
     for (auto it = queue.begin(); it != queue.end(); ++it)
     {
-        Passenger * p = *it;
-        string out = "[" + to_string(p->id) + ", " + to_string(p->from) + "->" + to_string(p->to) + "]";
+        Passenger p = *it;
+        string out = "[" + to_string(p.id) + ", " + to_string(p.from) + "->" + to_string(p.to) + "]";
         os << out;
     };
 }

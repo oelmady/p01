@@ -13,14 +13,15 @@
 void MetroSim::stop()
 {
     on = false;
-    cout << "Thanks for playing MetroSim. Have a nice day!";
+    cout << "Thanks for playing MetroSim. Have a nice day!" << endl;
 }
 
 /*
-moves the train forward one stop and boards passengers at the next station. the print function will indicate the train is present at the next station, and all passengers will at that station will have boarded
+disembarks all passengers arriving at the current station and adds their farewell statements to output, then moves the train forward one stop and boards passengers at the next station. the print function will indicate the train is present at the next station, and all passengers will at that station will have boarded
 */
 void MetroSim::move()
-{
+{ 
+    output += metro.disembarkAtStation();
     metro.moveTrain();
     metro.printTrain();
 }
@@ -35,13 +36,9 @@ void MetroSim::addPassenger(int from, int to)
 }
 
 // reads the names of the stations in stationsFile in order and assigns new stations to the metro
-void MetroSim::readStations(ifstream& stationsFile)
+void MetroSim::readStations(string stationName)
 {
-    std::string stationName;
-    while (getline(stationsFile, stationName))
-    {
-        metro.newStation(stationName);
-    }
+    metro.newStation(stationName);
 }
 
 // reads the command as a line and performs the appropriate function call
@@ -49,12 +46,11 @@ void MetroSim::readCommand(string command)
 {
     if (command == "m f") { stop(); }
     else if (command == "m m") { 
-        output += metro.disembarkAtStation();
         move(); 
     }
     else if (command[0] == 'p') {
-        int from = command[2];
-        int to   = command[4];
+        int from = std::stoi(command.substr(2,1));
+        int to   = std::stoi(command.substr(4,1));
         addPassenger(from, to);
     }
 }

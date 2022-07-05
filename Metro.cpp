@@ -16,13 +16,20 @@ void Metro::addToStation(const Passenger &p)
     metro[p.from]->enqueue(p);
 }
 
+void Metro::newStation(string stationName)
+{
+    shared_ptr<PassengerQueue> station(new PassengerQueue(stationName));
+    metro.emplace_back(station);
+    numStations++;
+}
+
 string Metro::disembarkAtStation()
 {
     string output;
     auto& destination = *metro[currentStation];
-    for (auto const& p : destination.queue)
-    {
-        output += farewell(*p);
+    
+    for (auto const& p : destination.queue){
+        output += farewell(p);
     }
     while (destination.size() > 0) {
         destination.dequeue();
@@ -40,36 +47,37 @@ void Metro::moveTrain()
 {
     currentStation = (currentStation + 1) % numStations;
 
-    for (auto &p : metro[currentStation]->queue)
-    {
-        p->boarded = true;
+    for (auto &p : metro[currentStation]->queue){
+        p.boarded = true;
     }
 }
 
 void Metro::printTrain()
 {
     cout << "Passengers on the train: {";
-    for (int i = 0; i < numStations; i++)
-    {
-        for (auto &p : metro[i]->queue)
-        {
-            if (p->boarded){
-                p->Passenger::print(cout);
+    for (int i = 0; i < numStations; i++){
+        for (auto &p : metro[i]->queue){
+            if (p.boarded){ 
+                p.Passenger::print(cout); 
             }
         }
     }
-    cout << "}";
-    for (int i = 0; i < numStations; i++)
-    {
+    cout << "}\n";
+    for (int i = 0; i < numStations; i++){
         auto& dest = metro[i];
         if (i == currentStation) {
             cout << "TRAIN: ";
         }
         else { 
-            cout << "      "; 
+            cout << "       "; 
         }
+
         cout << "[" << i << "] " << dest->name << " {";
-        dest->print(cout);
+        for (auto &p : dest->queue){
+            if (p.boarded == false){
+                p.Passenger::print(cout);
+            }
+        }
         cout << "}" << endl;
     }
 }

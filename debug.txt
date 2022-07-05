@@ -19,3 +19,5 @@ metro sim operates on user interface to perform
 
 make the interface for std::cin and commands.txt first~
 then make the back end depending on the input requirements of the front end
+
+if not stream istream 

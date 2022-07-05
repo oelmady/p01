@@ -12,7 +12,7 @@ public:
     void stop();
     void move();
     void addPassenger(int from, int to);
-    void readStations(ifstream& stationsFile);
+    void readStations(string stationName);
     void readCommand(string command);
 
     int numPassengers = 0;
