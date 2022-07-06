@@ -26,7 +26,7 @@ public:
 private:
     string farewell(const Passenger &p);
     int numStations = 0;
-    std::vector<shared_ptr<PassengerQueue> > metro;
+    std::vector<PassengerQueue* > metro;
 };
 
 #endif

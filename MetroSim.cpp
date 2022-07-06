@@ -31,7 +31,7 @@ adds a new passenger to the simulation, which is initialized with an id and assi
 */
 void MetroSim::addPassenger(int from, int to)
 {
-    shared_ptr<Passenger> p(new Passenger(++numPassengers, from, to));
+    Passenger * p = new Passenger(++numPassengers, from, to);
     metro.addToStation(*p);
 }
 

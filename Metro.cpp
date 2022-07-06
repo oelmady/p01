@@ -20,7 +20,7 @@ void Metro::addToStation(const Passenger &p)
 // a function that creates a new station with the name stationName and appends it to the metro, incrementing the number of stations by 1
 void Metro::newStation(string stationName)
 {
-    shared_ptr<PassengerQueue> station(new PassengerQueue(stationName));
+    PassengerQueue* station = new PassengerQueue(stationName);
     metro.emplace_back(station);
     numStations++;
 }
